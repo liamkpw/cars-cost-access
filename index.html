@@ -1,0 +1,807 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cars, Cost and Access in the UK</title>
+  <style>
+    :root {
+      --bg: #0b1220;
+      --bg-soft: #111a2b;
+      --card: rgba(255, 255, 255, 0.08);
+      --card-strong: rgba(255, 255, 255, 0.12);
+      --text: #eef2f7;
+      --muted: #b7c3d4;
+      --accent: #7dd3fc;
+      --accent-2: #f59e0b;
+      --line: rgba(255,255,255,0.12);
+      --shadow: 0 20px 60px rgba(0,0,0,0.35);
+      --max-width: 1200px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(125, 211, 252, 0.15), transparent 35%),
+        radial-gradient(circle at top right, rgba(245, 158, 11, 0.12), transparent 30%),
+        linear-gradient(180deg, #08101d 0%, #0b1220 45%, #0f172a 100%);
+      color: var(--text);
+      line-height: 1.75;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    .site-shell {
+      width: min(var(--max-width), calc(100% - 2rem));
+      margin: 0 auto;
+    }
+
+    .hero {
+      min-height: 88vh;
+      display: flex;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(120deg, rgba(8, 16, 29, 0.9), rgba(8, 16, 29, 0.55)),
+        url('https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=1600&q=80') center/cover;
+      filter: saturate(0.9);
+      z-index: -2;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(8, 16, 29, 0.2), rgba(8, 16, 29, 0.95));
+      z-index: -1;
+    }
+
+    .hero-content {
+      max-width: 760px;
+      padding: 5rem 0 4rem;
+    }
+
+    .eyebrow {
+      display: inline-block;
+      font-size: 0.85rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--accent);
+      margin-bottom: 1.1rem;
+    }
+
+    .hero h1 {
+      font-size: clamp(2.6rem, 7vw, 5.2rem);
+      line-height: 0.95;
+      letter-spacing: -0.03em;
+      margin-bottom: 1.25rem;
+    }
+
+    .hero p {
+      font-size: 1.1rem;
+      color: var(--muted);
+      max-width: 62ch;
+      margin-bottom: 2rem;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.95rem 1.35rem;
+      border-radius: 999px;
+      font-weight: 700;
+      transition: transform 0.2s ease, background 0.2s ease, color 0.2s ease;
+    }
+
+    .button.primary {
+      background: var(--accent);
+      color: #08101d;
+    }
+
+    .button.secondary {
+      border: 1px solid rgba(255,255,255,0.2);
+      background: rgba(255,255,255,0.05);
+      color: var(--text);
+      backdrop-filter: blur(8px);
+    }
+
+    .button:hover {
+      transform: translateY(-2px);
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1rem;
+      margin-top: 2.5rem;
+    }
+
+    .stat {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      padding: 1.15rem;
+      backdrop-filter: blur(10px);
+      box-shadow: var(--shadow);
+    }
+
+    .stat strong {
+      display: block;
+      font-size: 1.4rem;
+      margin-bottom: 0.3rem;
+    }
+
+    .stat span {
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .top-nav {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      backdrop-filter: blur(14px);
+      background: rgba(8, 16, 29, 0.7);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .nav-inner {
+      width: min(var(--max-width), calc(100% - 2rem));
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 0;
+      gap: 1rem;
+    }
+
+    .brand {
+      font-weight: 800;
+      letter-spacing: -0.02em;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 1.2rem;
+      flex-wrap: wrap;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .section {
+      padding: 5rem 0;
+    }
+
+    .section-header {
+      max-width: 760px;
+      margin-bottom: 2rem;
+    }
+
+    .section-header h2 {
+      font-size: clamp(2rem, 4vw, 3rem);
+      margin-bottom: 0.8rem;
+      line-height: 1.05;
+    }
+
+    .section-header p {
+      color: var(--muted);
+      max-width: 62ch;
+    }
+
+    .story-grid {
+      display: grid;
+      grid-template-columns: 280px minmax(0, 1fr);
+      gap: 2rem;
+      align-items: start;
+    }
+
+    .story-aside {
+      position: sticky;
+      top: 5.5rem;
+      display: grid;
+      gap: 1rem;
+    }
+
+    .info-card,
+    .visual-card,
+    .story-card,
+    .source-card {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      padding: 1.4rem;
+      backdrop-filter: blur(10px);
+      box-shadow: var(--shadow);
+    }
+
+    .info-card h3,
+    .visual-card h3,
+    .source-card h3 {
+      font-size: 1rem;
+      margin-bottom: 0.7rem;
+    }
+
+    .info-card p,
+    .visual-card p,
+    .source-card p,
+    .source-card li {
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .source-card ul {
+      padding-left: 1.1rem;
+      display: grid;
+      gap: 0.55rem;
+    }
+
+    .story-card {
+      padding: 0;
+      overflow: hidden;
+    }
+
+    .story-banner {
+      min-height: 280px;
+      display: flex;
+      align-items: end;
+      padding: 2rem;
+      position: relative;
+      isolation: isolate;
+    }
+
+    .story-banner::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: -2;
+      background-size: cover;
+      background-position: center;
+      transform: scale(1.03);
+    }
+
+    .story-banner::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+      background: linear-gradient(180deg, rgba(11,18,32,0.15), rgba(11,18,32,0.92));
+    }
+
+    .story-banner.story-one::before {
+      background-image: url('https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?auto=format&fit=crop&w=1400&q=80');
+    }
+
+    .story-banner.story-two::before {
+      background-image: url('https://images.unsplash.com/photo-1517142089942-ba376ce32a2e?auto=format&fit=crop&w=1400&q=80');
+    }
+
+    .story-banner h3 {
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      line-height: 1.05;
+      max-width: 12ch;
+    }
+
+    .story-body {
+      padding: 2rem;
+    }
+
+    .story-meta {
+      display: flex;
+      gap: 0.8rem;
+      flex-wrap: wrap;
+      margin-bottom: 1.3rem;
+    }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      border-radius: 999px;
+      padding: 0.45rem 0.8rem;
+      background: rgba(125,211,252,0.12);
+      color: var(--accent);
+      font-size: 0.82rem;
+      font-weight: 700;
+    }
+
+    .story-body p {
+      font-size: 1.04rem;
+      margin-bottom: 1.15rem;
+      color: #eef3fa;
+    }
+
+    .story-body h4 {
+      font-size: 1.45rem;
+      line-height: 1.2;
+      margin: 2rem 0 0.9rem;
+    }
+
+    .story-body blockquote {
+      margin: 1.5rem 0;
+      padding: 1.2rem 1.3rem;
+      border-left: 4px solid var(--accent-2);
+      background: rgba(245, 158, 11, 0.08);
+      border-radius: 0 16px 16px 0;
+      color: #fff6e5;
+      font-size: 1.05rem;
+    }
+
+    .visual-placeholder-wrap {
+      display: grid;
+      gap: 1.2rem;
+      margin: 2rem 0;
+    }
+
+    .visual-placeholder {
+      border: 1px dashed rgba(255,255,255,0.18);
+      border-radius: 22px;
+      padding: 1.35rem;
+      background: rgba(255,255,255,0.03);
+    }
+
+    .visual-placeholder strong {
+      display: block;
+      margin-bottom: 0.4rem;
+      font-size: 1rem;
+    }
+
+    .visual-placeholder span {
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .quote-strip {
+      padding: 3rem 0;
+    }
+
+    .quote-box {
+      border-radius: 30px;
+      padding: 2.2rem;
+      background: linear-gradient(135deg, rgba(125, 211, 252, 0.12), rgba(245, 158, 11, 0.12));
+      border: 1px solid rgba(255,255,255,0.1);
+      box-shadow: var(--shadow);
+    }
+
+    .quote-box p {
+      font-size: clamp(1.3rem, 3vw, 2rem);
+      line-height: 1.25;
+      max-width: 24ch;
+      margin-bottom: 0.9rem;
+    }
+
+    .quote-box small {
+      color: var(--muted);
+    }
+
+    .footer {
+      padding: 3rem 0 4rem;
+      color: var(--muted);
+      text-align: center;
+      font-size: 0.95rem;
+    }
+
+    @media (max-width: 960px) {
+      .story-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .story-aside {
+        position: static;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .stats {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 700px) {
+      .hero {
+        min-height: auto;
+      }
+
+      .hero-content {
+        padding: 4rem 0;
+      }
+
+      .nav-inner {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .story-aside {
+        grid-template-columns: 1fr;
+      }
+
+      .story-body,
+      .story-banner {
+        padding: 1.35rem;
+      }
+
+      .section {
+        padding: 3.75rem 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <nav class="top-nav">
+    <div class="nav-inner">
+      <a href="#top" class="brand">Cars, Cost & Access</a>
+      <div class="nav-links">
+        <a href="#overview">Overview</a>
+        <a href="#story-one">Story One</a>
+        <a href="#story-two">Story Two</a>
+        <a href="#sources">Sources</a>
+      </div>
+    </div>
+  </nav>
+
+  <header class="hero" id="top">
+    <div class="site-shell">
+      <div class="hero-content">
+        <span class="eyebrow">Data-driven feature project</span>
+        <h1>Cars, cost and access in the UK</h1>
+        <p>
+          Two feature stories exploring how driving in Britain has become a question of inequality.
+          One examines whether young people are being priced out of car ownership. The other asks
+          whether the electric vehicle transition is creating a new urban-rural divide.
+        </p>
+        <div class="hero-actions">
+          <a href="#story-one" class="button primary">Read story one</a>
+          <a href="#story-two" class="button secondary">Read story two</a>
+        </div>
+        <div class="stats">
+          <div class="stat">
+            <strong>2</strong>
+            <span>feature stories built for a digital audience</span>
+          </div>
+          <div class="stat">
+            <strong>1000+</strong>
+            <span>words of written content in each story</span>
+          </div>
+          <div class="stat">
+            <strong>Charts + map</strong>
+            <span>visual points designed to extend each narrative</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="section" id="overview">
+      <div class="site-shell">
+        <div class="section-header">
+          <span class="eyebrow">Project focus</span>
+          <h2>Mobility is not just about transport. It is also about access, opportunity and inequality.</h2>
+          <p>
+            These two stories approach cars as more than a consumer issue. They examine how affordability,
+            infrastructure and geography shape who can move easily through everyday life and who cannot.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="story-one">
+      <div class="site-shell story-grid">
+        <aside class="story-aside">
+          <div class="info-card">
+            <h3>Story one at a glance</h3>
+            <p>
+              Main argument: driving is becoming less affordable for young people because key ownership
+              costs have risen faster than wages.
+            </p>
+          </div>
+          <div class="visual-card">
+            <h3>Suggested visuals</h3>
+            <p>
+              Add a line chart comparing wages, insurance and used car prices, plus a bar chart showing a
+              simple annual cost breakdown.
+            </p>
+          </div>
+        </aside>
+
+        <article class="story-card">
+          <div class="story-banner story-one">
+            <h3>Priced Out: Why Young People in the UK Are Driving Less</h3>
+          </div>
+          <div class="story-body">
+            <div class="story-meta">
+              <span class="tag">Feature story</span>
+              <span class="tag">Cost of living</span>
+              <span class="tag">Transport inequality</span>
+            </div>
+
+            <p>For decades, learning to drive has been treated as a rite of passage in the UK. A symbol of independence, adulthood, and opportunity. But for many young people today, getting behind the wheel is no longer a given. It is becoming a luxury.</p>
+
+            <p>Across the UK, the cost of driving has risen sharply over the past decade. Insurance premiums for young drivers have surged, used car prices remain volatile following the pandemic, and fuel costs continue to fluctuate. At the same time, wage growth has failed to keep pace. The result is a growing gap between what young people earn and what it costs to drive.</p>
+
+            <p>This raises a simple but important question: are young people choosing not to drive, or are they being priced out?</p>
+
+            <div class="visual-placeholder-wrap">
+              <div class="visual-placeholder">
+                <strong>Chart placeholder 1: Wages vs driving costs over time</strong>
+                <span>Embed a line chart here comparing wages, insurance and used car prices from your chosen years.</span>
+              </div>
+            </div>
+
+            <h4>The cost of getting on the road</h4>
+
+            <p>At first glance, rising driving costs are nothing new. Fuel prices have always fluctuated, and insurance has long been expensive for younger drivers. But what has changed is the scale and consistency of these increases.</p>
+
+            <p>Insurance premiums, in particular, have become a major barrier. Younger drivers are statistically more likely to be involved in accidents, and insurers price policies accordingly. However, recent years have seen premiums rise to levels that are increasingly difficult to absorb, especially for those early in their careers or in part-time work.</p>
+
+            <p>At the same time, the cost of buying a car has also shifted. During the COVID-19 pandemic, supply chain disruptions and semiconductor shortages drove up the price of used vehicles. Although prices have stabilised somewhat, they remain significantly higher than pre-pandemic levels.</p>
+
+            <p>Fuel adds a further layer of pressure. While prices rise and fall, the overall trend has contributed to an increasingly expensive picture of car ownership. What emerges is not a single cost spike, but a cumulative burden.</p>
+
+            <blockquote>
+              The issue is not just that driving is expensive. It is that costs are rising faster than the income many young people rely on.
+            </blockquote>
+
+            <h4>Wages vs costs: a growing gap</h4>
+
+            <p>The real issue is not simply that driving is expensive. It is that costs are rising faster than income.</p>
+
+            <p>A comparison of median wage growth with key driving costs over time reveals a clear divergence. While wages have increased gradually, the cost of insurance and car ownership has risen much more sharply. The gap between the two has widened, particularly since the late 2010s.</p>
+
+            <p>This is where the idea of affordability becomes crucial. Driving has always required financial commitment, but when costs begin to outpace earnings, access becomes restricted. What was once a manageable expense becomes a significant financial barrier.</p>
+
+            <p>For young people, this gap is especially pronounced. Entry-level salaries and part-time wages leave little room to absorb large, unpredictable costs such as insurance or repairs. Even saving for an initial vehicle can be difficult when everyday expenses are already rising.</p>
+
+            <div class="visual-placeholder-wrap">
+              <div class="visual-placeholder">
+                <strong>Chart placeholder 2: Annual cost breakdown</strong>
+                <span>Use a bar chart here to show how insurance, fuel and maintenance add up in one year.</span>
+              </div>
+            </div>
+
+            <h4>More than a lifestyle choice</h4>
+
+            <p>Declining rates of driving among young people are often explained through lifestyle changes. Increasing urbanisation, improved public transport in cities, and shifting attitudes towards car ownership are all commonly cited.</p>
+
+            <p>While these factors are real, they do not tell the whole story.</p>
+
+            <p>Economic constraints play a significant role. When the cost of driving becomes prohibitively high, opting out is not necessarily a preference. It is a necessity.</p>
+
+            <p>Data on driving licence uptake supports this shift. Fewer young people are obtaining licences compared to previous generations. While this trend is sometimes framed as a cultural change, it aligns closely with the period in which driving costs have accelerated.</p>
+
+            <p>This suggests that behaviour is not changing in isolation. It is responding to economic pressure.</p>
+
+            <h4>Why it matters</h4>
+
+            <p>The implications of this shift extend beyond individual inconvenience. In many parts of the UK, particularly outside major cities, access to a car is closely tied to access to opportunity.</p>
+
+            <p>Public transport networks are often less developed in rural or semi-urban areas, making driving essential for commuting, education, and social mobility. Without access to a vehicle, job opportunities can be limited, and travel times significantly increased.</p>
+
+            <p>This creates a form of structural inequality. Those who can afford to drive retain access to a wider range of opportunities, while those who cannot are constrained by geography.</p>
+
+            <p>In this sense, car ownership is not just a consumer choice. It is part of the infrastructure that shapes everyday life.</p>
+
+            <h4>A quieter form of inequality</h4>
+
+            <p>Discussions of generational inequality in the UK tend to focus on housing, student debt, and wage stagnation. Transport, by comparison, receives far less attention.</p>
+
+            <p>Yet the ability to move freely, to access work and services, and to participate fully in society is just as important. When that ability becomes tied to rising costs, inequality becomes embedded in everyday mobility.</p>
+
+            <p>What makes this issue particularly striking is how quietly it has developed. There has been no single moment of crisis, no dramatic policy change. Instead, the gap has widened gradually, through overlapping pressures that are rarely considered together.</p>
+
+            <h4>Conclusion</h4>
+
+            <p>Young people in the UK are not simply turning away from driving. For many, the option is slipping out of reach.</p>
+
+            <p>As costs continue to rise and wages struggle to keep pace, car ownership is becoming less accessible to those at the start of their working lives. This shift challenges the idea that declining driving rates reflect changing preferences alone.</p>
+
+            <p>Instead, it points to a more structural issue. One where economic pressure shapes behaviour, and where access to mobility is no longer evenly distributed.</p>
+
+            <p>Driving may once have symbolised independence. Increasingly, it is becoming a marker of who can afford it.</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="quote-strip">
+      <div class="site-shell">
+        <div class="quote-box">
+          <p>Both stories ask the same underlying question: what happens when mobility becomes unevenly available?</p>
+          <small>From personal affordability to national infrastructure, access shapes the story.</small>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="story-two">
+      <div class="site-shell story-grid">
+        <aside class="story-aside">
+          <div class="info-card">
+            <h3>Story two at a glance</h3>
+            <p>
+              Main argument: the EV transition may be growing nationally, but access remains uneven when charger provision is compared across regions.
+            </p>
+          </div>
+          <div class="visual-card">
+            <h3>Suggested visuals</h3>
+            <p>
+              Add a UK map showing chargers per 100,000 people and a bar chart comparing the best and worst served regions.
+            </p>
+          </div>
+        </aside>
+
+        <article class="story-card">
+          <div class="story-banner story-two">
+            <h3>The EV Divide: Who Actually Has Access to Electric Cars in the UK?</h3>
+          </div>
+          <div class="story-body">
+            <div class="story-meta">
+              <span class="tag">Feature story</span>
+              <span class="tag">EV transition</span>
+              <span class="tag">Regional inequality</span>
+            </div>
+
+            <p>The transition to electric vehicles is often presented as a clear sign of progress. Across the UK, the number of electric cars on the road is rising, and public charging infrastructure continues to expand. Government targets and industry investment suggest a future that is cleaner, more efficient, and increasingly electric.</p>
+
+            <p>But beneath this narrative of growth lies a more uneven reality.</p>
+
+            <p>While electric vehicle infrastructure is expanding overall, access to it is not evenly distributed. In practice, where you live plays a significant role in whether switching to an electric car is realistic at all.</p>
+
+            <div class="visual-placeholder-wrap">
+              <div class="visual-placeholder">
+                <strong>Map placeholder: UK chargers per 100,000 people</strong>
+                <span>Embed a choropleth or region map here to show charger access by region or local authority.</span>
+              </div>
+            </div>
+
+            <h4>Growth at a national level</h4>
+
+            <p>National statistics present a strong upward trend. The number of registered electric vehicles has increased rapidly in recent years, supported by policy commitments to phase out petrol and diesel cars. At the same time, the number of public charging points has also grown, reaching tens of thousands across the UK.</p>
+
+            <p>At this level, the transition appears to be accelerating.</p>
+
+            <p>However, national totals only tell part of the story. They show how much infrastructure exists, but not how it is distributed.</p>
+
+            <h4>Looking beyond the totals</h4>
+
+            <p>When charging infrastructure is examined relative to population, a different picture emerges.</p>
+
+            <p>Some regions, particularly major urban centres, have far higher availability of public chargers per person. London, for example, consistently ranks among the highest in terms of charger density. In contrast, rural areas and regions outside major cities often have significantly fewer chargers relative to their population.</p>
+
+            <p>This matters because access to charging is one of the most important factors in whether an individual can realistically adopt an electric vehicle. Without reliable access, ownership becomes impractical, regardless of national growth figures.</p>
+
+            <blockquote>
+              National growth can look impressive while local access remains deeply uneven.
+            </blockquote>
+
+            <h4>The urban advantage</h4>
+
+            <p>The concentration of infrastructure in cities reflects a combination of factors. Higher population density makes installation more cost-effective, while existing demand is often stronger in urban areas where early adoption tends to cluster.</p>
+
+            <p>Cities also benefit from greater investment, both public and private. Local authorities in urban regions are often better resourced to support infrastructure projects, and private companies are more likely to install chargers where usage is guaranteed.</p>
+
+            <p>However, this creates a feedback loop. Areas with more chargers become more attractive for EV adoption, while areas with fewer chargers fall further behind.</p>
+
+            <h4>Rural constraints</h4>
+
+            <p>In rural areas, the challenges are different. Longer distances, lower population density, and limited existing infrastructure make charger installation more complex and less commercially attractive.</p>
+
+            <p>For residents in these areas, home charging may seem like a solution. But not all households have access to off-street parking or the ability to install a home charger. For those without it, reliance on public infrastructure becomes essential.</p>
+
+            <p>If that infrastructure is sparse, switching to an electric vehicle becomes significantly more difficult.</p>
+
+            <div class="visual-placeholder-wrap">
+              <div class="visual-placeholder">
+                <strong>Chart placeholder: Best and worst served regions</strong>
+                <span>Use a ranked bar chart here to compare charger availability per capita across regions.</span>
+              </div>
+            </div>
+
+            <h4>A question of access</h4>
+
+            <p>The result is a growing divide in access to electric mobility.</p>
+
+            <p>On paper, the UK is moving towards a cleaner transport system. In practice, that transition is easier for some than for others. Those in well-served urban areas can take advantage of expanding infrastructure, while others face structural barriers that limit participation.</p>
+
+            <p>This raises broader questions about fairness. If the transition to electric vehicles is a central part of climate policy, then access to the infrastructure that supports it becomes a matter of equity, not just convenience.</p>
+
+            <h4>What the data shows</h4>
+
+            <p>Comparing regions directly highlights the scale of the disparity. When charger numbers are adjusted for population, the gap between the most and least served areas becomes clear.</p>
+
+            <p>A simple bar chart comparing regions by chargers per 100,000 people reveals a consistent pattern: urban areas dominate, while rural regions lag behind. The difference is not marginal. In some cases, access levels vary dramatically between regions within the same country.</p>
+
+            <p>This reinforces the idea that national growth alone is not a sufficient measure of progress. Without considering distribution, it is difficult to assess who is actually benefiting from the transition.</p>
+
+            <h4>Why it matters</h4>
+
+            <p>Transport is closely linked to access to work, services, and social participation. If the shift to electric vehicles creates uneven access to mobility, it risks reinforcing existing inequalities rather than reducing them.</p>
+
+            <p>This is particularly important as the UK moves towards phasing out new petrol and diesel cars. If alternatives are not equally accessible, some groups may be left with fewer viable transport options.</p>
+
+            <p>The transition to electric vehicles is often framed as a technological shift. But it is also a social one. How infrastructure is distributed will shape who can participate in that transition.</p>
+
+            <h4>Conclusion</h4>
+
+            <p>The growth of electric vehicles in the UK tells a story of progress. But it is an incomplete one.</p>
+
+            <p>Looking more closely at how infrastructure is distributed reveals a more complex picture. Access is uneven, and location plays a decisive role in who can benefit from the transition.</p>
+
+            <p>As the UK continues to move towards an electric future, the question is not just how many chargers are installed, but where they are placed.</p>
+
+            <p>Because in the transition to electric vehicles, access is everything.</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" id="sources">
+      <div class="site-shell">
+        <div class="section-header">
+          <span class="eyebrow">Add your evidence</span>
+          <h2>Source and embed section</h2>
+          <p>
+            Use this area to list data sources, embed Flourish charts, or add short notes on methods once your visuals are complete.
+          </p>
+        </div>
+
+        <div class="story-grid">
+          <div class="source-card">
+            <h3>Possible sources for story one</h3>
+            <ul>
+              <li>Office for National Statistics earnings datasets</li>
+              <li>Insurance premium reports for younger drivers</li>
+              <li>Used car price or fuel price data from a reliable UK source</li>
+              <li>DVLA or transport data on licence holding by age</li>
+            </ul>
+          </div>
+          <div class="source-card">
+            <h3>Possible sources for story two</h3>
+            <ul>
+              <li>Department for Transport public charge point data</li>
+              <li>ONS population estimates</li>
+              <li>Regional or local authority geographic data for mapping</li>
+              <li>Supporting EV registration context where useful</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="site-shell">
+      <p>Created as a digital feature project on transport inequality in the United Kingdom.</p>
+    </div>
+  </footer>
+</body>
+</html>
