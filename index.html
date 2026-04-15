@@ -17,6 +17,8 @@
       --line: rgba(255,255,255,0.12);
       --shadow: 0 20px 60px rgba(0,0,0,0.35);
       --max-width: 1200px;
+      --timeline-bg: #162134;
+      --slider-accent: #f59e0b;
     }
 
     * {
@@ -53,6 +55,10 @@
       width: min(var(--max-width), calc(100% - 2rem));
       margin: 0 auto;
     }
+
+    /* ========================= */
+    /* EDITOR NOTE: TOP HERO AREA */
+    /* ========================= */
 
     .hero {
       min-height: 88vh;
@@ -169,6 +175,10 @@
       font-size: 0.95rem;
     }
 
+    /* ========================= */
+    /* EDITOR NOTE: NAVIGATION */
+    /* ========================= */
+
     .top-nav {
       position: sticky;
       top: 0;
@@ -200,6 +210,10 @@
       color: var(--muted);
       font-size: 0.95rem;
     }
+
+    /* ========================= */
+    /* EDITOR NOTE: GENERAL PAGE LAYOUT */
+    /* ========================= */
 
     .section {
       padding: 5rem 0;
@@ -236,9 +250,7 @@
     }
 
     .info-card,
-    .visual-card,
-    .story-card,
-    .source-card {
+    .story-card {
       background: var(--card);
       border: 1px solid var(--line);
       border-radius: 24px;
@@ -247,31 +259,25 @@
       box-shadow: var(--shadow);
     }
 
-    .info-card h3,
-    .visual-card h3,
-    .source-card h3 {
+    .info-card h3 {
       font-size: 1rem;
       margin-bottom: 0.7rem;
     }
 
-    .info-card p,
-    .visual-card p,
-    .source-card p,
-    .source-card li {
+    .info-card p {
       color: var(--muted);
       font-size: 0.95rem;
     }
 
-    .source-card ul {
-      padding-left: 1.1rem;
-      display: grid;
-      gap: 0.55rem;
-    }
-
+    
     .story-card {
       padding: 0;
       overflow: hidden;
     }
+
+    /* ========================= */
+    /* EDITOR NOTE: STORY BANNERS */
+    /* ========================= */
 
     .story-banner {
       min-height: 280px;
@@ -301,11 +307,11 @@
     }
 
     .story-banner.story-one::before {
-      background-image: url('https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?auto=format&fit=crop&w=1400&q=80');
+      background-image: url('https://live.staticflickr.com/65535/52650535959_70107ee4e2_b.jpg');
     }
 
     .story-banner.story-two::before {
-      background-image: url('https://images.unsplash.com/photo-1517142089942-ba376ce32a2e?auto=format&fit=crop&w=1400&q=80');
+      background-image: url('https://editorial.pxcrush.net/carsales/general/editorial/tesla-cybertruck-setb-1-pwj0.jpg?width=1024&height=682');
     }
 
     .story-banner h3 {
@@ -358,29 +364,144 @@
       font-size: 1.05rem;
     }
 
-    .visual-placeholder-wrap {
-      display: grid;
-      gap: 1.2rem;
+    /* ========================= */
+    /* EDITOR NOTE: STORY 1 TIMELINE */
+    /* ========================= */
+
+    .timeline-section {
       margin: 2rem 0;
-    }
-
-    .visual-placeholder {
-      border: 1px dashed rgba(255,255,255,0.18);
-      border-radius: 22px;
-      padding: 1.35rem;
+      padding: 1.4rem;
       background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 22px;
     }
 
-    .visual-placeholder strong {
-      display: block;
-      margin-bottom: 0.4rem;
+    .timeline-section h5 {
       font-size: 1rem;
+      margin-bottom: 1rem;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
     }
 
-    .visual-placeholder span {
-      color: var(--muted);
-      font-size: 0.95rem;
+    .timeline-buttons {
+      display: flex;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+      margin-bottom: 1rem;
     }
+
+    .timeline-buttons button {
+      padding: 0.8rem 1rem;
+      border: 1px solid rgba(255,255,255,0.16);
+      background: var(--timeline-bg);
+      color: var(--text);
+      border-radius: 999px;
+      cursor: pointer;
+      font-weight: 700;
+    }
+
+    .timeline-buttons button:hover,
+    .timeline-buttons button.active {
+      background: var(--accent);
+      color: #08101d;
+    }
+
+    .timeline-panel {
+      padding: 1rem 1.1rem;
+      border-left: 4px solid var(--accent);
+      background: rgba(255,255,255,0.04);
+      border-radius: 0 16px 16px 0;
+    }
+
+    .timeline-panel strong {
+      display: block;
+      margin-bottom: 0.45rem;
+      color: #ffffff;
+    }
+
+    .timeline-panel p {
+      margin-bottom: 0;
+      color: var(--muted);
+      font-size: 0.98rem;
+    }
+
+    /* ========================= */
+    /* EDITOR NOTE: STORY 2 IMAGE SLIDER */
+    /* ========================= */
+
+    .comparison-section {
+      margin: 2rem 0;
+      padding: 1.4rem;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 22px;
+    }
+
+    .comparison-section h5 {
+      font-size: 1rem;
+      margin-bottom: 0.6rem;
+      color: var(--accent-2);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    .comparison-section p {
+      color: var(--muted);
+      margin-bottom: 1rem;
+      font-size: 0.98rem;
+    }
+
+    .image-compare {
+      position: relative;
+      width: 100%;
+      max-width: 760px;
+      margin: 0 auto;
+      overflow: hidden;
+      border-radius: 18px;
+      border: 1px solid rgba(255,255,255,0.16);
+      box-shadow: var(--shadow);
+      aspect-ratio: 16 / 9;
+      background: #111a2b;
+    }
+
+    .image-compare > img,
+    .image-overlay img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .image-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 50%;
+      height: 100%;
+      overflow: hidden;
+      border-right: 2px solid rgba(255,255,255,0.85);
+    }
+
+    .image-compare-range {
+      width: 100%;
+      margin-top: 1rem;
+      accent-color: var(--slider-accent);
+    }
+
+    .image-labels {
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-top: 0.85rem;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    /* ========================= */
+    /* EDITOR NOTE: QUOTE STRIP AND FOOTER */
+    /* ========================= */
 
     .quote-strip {
       padding: 3rem 0;
@@ -453,10 +574,17 @@
       .section {
         padding: 3.75rem 0;
       }
+
+      .timeline-buttons {
+        flex-direction: column;
+      }
     }
   </style>
 </head>
 <body>
+  <!-- ========================= -->
+  <!-- EDITOR NOTE: SITE NAVIGATION -->
+  <!-- ========================= -->
   <nav class="top-nav">
     <div class="nav-inner">
       <a href="#top" class="brand">Cars, Cost & Access</a>
@@ -464,11 +592,13 @@
         <a href="#overview">Overview</a>
         <a href="#story-one">Story One</a>
         <a href="#story-two">Story Two</a>
-        <a href="#sources">Sources</a>
       </div>
     </div>
   </nav>
 
+  <!-- ========================= -->
+  <!-- EDITOR NOTE: HERO -->
+  <!-- ========================= -->
   <header class="hero" id="top">
     <div class="site-shell">
       <div class="hero-content">
@@ -493,8 +623,8 @@
             <span>words of written content in each story</span>
           </div>
           <div class="stat">
-            <strong>Charts + map</strong>
-            <span>visual points designed to extend each narrative</span>
+            <strong>Interactive</strong>
+            <span>timeline and image slider to extend the written narrative</span>
           </div>
         </div>
       </div>
@@ -502,6 +632,9 @@
   </header>
 
   <main>
+    <!-- ========================= -->
+    <!-- EDITOR NOTE: OVERVIEW SECTION -->
+    <!-- ========================= -->
     <section class="section" id="overview">
       <div class="site-shell">
         <div class="section-header">
@@ -515,6 +648,9 @@
       </div>
     </section>
 
+    <!-- ========================= -->
+    <!-- EDITOR NOTE: STORY ONE -->
+    <!-- ========================= -->
     <section class="section" id="story-one">
       <div class="site-shell story-grid">
         <aside class="story-aside">
@@ -525,14 +661,7 @@
               costs have risen faster than wages.
             </p>
           </div>
-          <div class="visual-card">
-            <h3>Suggested visuals</h3>
-            <p>
-              Add a line chart comparing wages, insurance and used car prices, plus a bar chart showing a
-              simple annual cost breakdown.
-            </p>
-          </div>
-        </aside>
+          </aside>
 
         <article class="story-card">
           <div class="story-banner story-one">
@@ -545,87 +674,86 @@
               <span class="tag">Transport inequality</span>
             </div>
 
+            <!-- EDITOR NOTE: REPLACE THESE PARAGRAPHS WITH FINAL STORY ONE TEXT -->
             <p>For decades, learning to drive has been treated as a rite of passage in the UK. A symbol of independence, adulthood, and opportunity. But for many young people today, getting behind the wheel is no longer a given. It is becoming a luxury.</p>
 
-            <p>Across the UK, the cost of driving has risen sharply over the past decade. Insurance premiums for young drivers have surged, used car prices remain volatile following the pandemic, and fuel costs continue to fluctuate. At the same time, wage growth has failed to keep pace. The result is a growing gap between what young people earn and what it costs to drive.</p>
+            <p>Across the UK, the cost of driving has risen sharply over the past decade. Insurance premiums for young drivers have increased significantly, with recent estimates suggesting average annual costs now sit around £1,500–£2,200 per year for new drivers in the UK (Cook,2025) At the same time, used car prices surged during and after the pandemic, rising by approximately 32% year-on-year at their peak in 2021–2022 before stabilising at a higher baseline. (Sharkey,2025) Fuel prices, while fluctuating, have also contributed to the overall cost of driving, with average petrol prices reaching around 134p per litre in 2026, with spikes up to around 179p per litre during recent price surges. (Brumble Guides,2026)</p>
+
+            <p>In contrast, wage growth has been far more gradual. Median weekly earnings for full-time employees in the UK were £766.60 in April 2025, according to data from the Office for National Statistics Annual Survey of Hours and Earnings. This figure represents a 5.3% increase compared with 2024, highlighting steady but relatively modest growth in earnings. Over the same period, key driving costs have risen more sharply, creating a growing gap between what people earn and what it costs to drive (Office for National Statistics,2025)</p>
 
             <p>This raises a simple but important question: are young people choosing not to drive, or are they being priced out?</p>
 
-            <div class="visual-placeholder-wrap">
-              <div class="visual-placeholder">
-                <strong>Chart placeholder 1: Wages vs driving costs over time</strong>
-                <span>Embed a line chart here comparing wages, insurance and used car prices from your chosen years.</span>
+            <div class="timeline-section">
+              <h5>Interactive timeline</h5>
+              <div class="timeline-buttons">
+                <button class="active" data-year="1994">1994</button>
+                <button data-year="2014">2014</button>
+                <button data-year="2021">2021</button>
+                <button data-year="2025">2025</button>
+              </div>
+              <div class="timeline-panel" id="timeline-panel">
+                <strong>1994</strong>
+                <p>Around 75% of people aged 21 to 29 held a driving licence, showing how normal driving once was for young adults.</p>
               </div>
             </div>
 
             <h4>The cost of getting on the road</h4>
 
-            <p>At first glance, rising driving costs are nothing new. Fuel prices have always fluctuated, and insurance has long been expensive for younger drivers. But what has changed is the scale and consistency of these increases.</p>
+            <p>At first glance, rising driving costs are nothing new. Fuel prices have always fluctuated, and insurance has long been expensive for younger drivers. What has changed is how these costs combine.</p>
 
-            <p>Insurance premiums, in particular, have become a major barrier. Younger drivers are statistically more likely to be involved in accidents, and insurers price policies accordingly. However, recent years have seen premiums rise to levels that are increasingly difficult to absorb, especially for those early in their careers or in part-time work.</p>
+            <p>Rather than a single expense increasing dramatically, the pressure comes from accumulation. Insurance, fuel, maintenance, and upfront vehicle costs now intersect in a way that makes entry into driving significantly harder than it once was.</p>
 
-            <p>At the same time, the cost of buying a car has also shifted. During the COVID-19 pandemic, supply chain disruptions and semiconductor shortages drove up the price of used vehicles. Although prices have stabilised somewhat, they remain significantly higher than pre-pandemic levels.</p>
+            <p>One way to understand this shift is through total annual cost. Estimates suggest that running a car in the UK can cost around £3,350 per year on average, covering expenses such as fuel, insurance, tax, and maintenance. (Haines, 2025) With insurance alone accounting for a disproportionately large share for younger drivers, these combined costs place significant financial pressure on new drivers. When these costs are considered together, affordability becomes less about individual price increases and more about overall financial strain.</p>
 
-            <p>Fuel adds a further layer of pressure. While prices rise and fall, the overall trend has contributed to an increasingly expensive picture of car ownership. What emerges is not a single cost spike, but a cumulative burden.</p>
+            <p>This cumulative burden is what distinguishes the current moment from previous periods of rising costs. It is not simply that driving is expensive. It is that multiple cost pressures are now felt at once.</p>
 
-            <blockquote>
-              The issue is not just that driving is expensive. It is that costs are rising faster than the income many young people rely on.
-            </blockquote>
+            <h4>Wages vs costs: a growing imbalance</h4>
 
-            <h4>Wages vs costs: a growing gap</h4>
+            <p>The issue, then, is not just cost, but proportion.</p>
 
-            <p>The real issue is not simply that driving is expensive. It is that costs are rising faster than income.</p>
+            <p>Affordability depends on how costs relate to income. Even where wages are rising, they do not necessarily keep pace with the combined costs of driving. For younger workers, this imbalance is particularly significant.</p>
 
-            <p>A comparison of median wage growth with key driving costs over time reveals a clear divergence. While wages have increased gradually, the cost of insurance and car ownership has risen much more sharply. The gap between the two has widened, particularly since the late 2010s.</p>
+            <p>For example, a newly qualified driver earning around £32,347 per year the median salary for those aged 22–29 equivalent to roughly £2,695 per month before tax, could face insurance costs that take up a significant share of their income. The data also shows that weekly earnings for this age group average around £648 per week, highlighting how much lower incomes are at the start of working life compared to later stages. (Hilton,n.d) This lower income base makes it more difficult to absorb high upfront costs such as insurance. When fuel and maintenance are added, the total cost of driving can take up a substantial share of earnings.</p>
 
-            <p>This is where the idea of affordability becomes crucial. Driving has always required financial commitment, but when costs begin to outpace earnings, access becomes restricted. What was once a manageable expense becomes a significant financial barrier.</p>
+            <p>This shifts driving from a manageable expense to a financial risk. Unexpected costs, such as repairs or premium increases, become harder to absorb, particularly for those without savings.</p>
 
-            <p>For young people, this gap is especially pronounced. Entry-level salaries and part-time wages leave little room to absorb large, unpredictable costs such as insurance or repairs. Even saving for an initial vehicle can be difficult when everyday expenses are already rising.</p>
-
-            <div class="visual-placeholder-wrap">
-              <div class="visual-placeholder">
-                <strong>Chart placeholder 2: Annual cost breakdown</strong>
-                <span>Use a bar chart here to show how insurance, fuel and maintenance add up in one year.</span>
-              </div>
-            </div>
+            <p>The result is not simply reduced affordability, but increased financial uncertainty around car ownership.</p>
 
             <h4>More than a lifestyle choice</h4>
 
-            <p>Declining rates of driving among young people are often explained through lifestyle changes. Increasing urbanisation, improved public transport in cities, and shifting attitudes towards car ownership are all commonly cited.</p>
+            <p>Declining rates of driving among young people are often explained through lifestyle changes. Increasing urbanisation, improved public transport, and shifting attitudes towards car ownership are all commonly cited.</p>
 
-            <p>While these factors are real, they do not tell the whole story.</p>
+            <p>While these factors are real, they do not fully explain the scale of the shift.</p>
 
-            <p>Economic constraints play a significant role. When the cost of driving becomes prohibitively high, opting out is not necessarily a preference. It is a necessity.</p>
+            <p>Licence holding among young people has declined over time, with figures showing a drop from approximately 75% of 21–29-year-olds holding a licence in 1994 to around 63% by 2014, over a period of roughly 20 years. (UK Parliament, 2021) While this trend is sometimes framed as a cultural shift, it coincides with rising costs across multiple aspects of car ownership.</p>
 
-            <p>Data on driving licence uptake supports this shift. Fewer young people are obtaining licences compared to previous generations. While this trend is sometimes framed as a cultural change, it aligns closely with the period in which driving costs have accelerated.</p>
-
-            <p>This suggests that behaviour is not changing in isolation. It is responding to economic pressure.</p>
+            <p>This overlap suggests that economic factors are playing a central role. Opting out of driving may appear to be a choice, but in many cases it reflects limited financial capacity.</p>
 
             <h4>Why it matters</h4>
 
-            <p>The implications of this shift extend beyond individual inconvenience. In many parts of the UK, particularly outside major cities, access to a car is closely tied to access to opportunity.</p>
+            <p>The implications of this shift extend beyond individual convenience. In many parts of the UK, particularly outside major cities, access to a car is closely tied to access to opportunity.</p>
 
-            <p>Public transport networks are often less developed in rural or semi-urban areas, making driving essential for commuting, education, and social mobility. Without access to a vehicle, job opportunities can be limited, and travel times significantly increased.</p>
+            <p>In areas with limited public transport, reliance on private vehicles remains high. In the most rural parts of England, around 95% of households in villages, hamlets and isolated dwellings have access to at least one car (Department for Transport,2022), highlighting a strong dependence on private transport for daily life. Without access to a vehicle, commuting options become more restricted, often increasing travel time and reducing job flexibility.</p>
 
-            <p>This creates a form of structural inequality. Those who can afford to drive retain access to a wider range of opportunities, while those who cannot are constrained by geography.</p>
+            <p>This has a direct impact on employment access. Research shows that 57% of the working-age population in England live in areas with low public transport access to jobs within a 45-minute commute (Benson, M., &amp; Reardon, L. 2025), meaning many people are unable to easily reach employment without a car. These challenges are particularly pronounced in rural and semi-urban areas, where limited transport options can increase travel times and restrict access to a wider range of jobs.</p>
 
-            <p>In this sense, car ownership is not just a consumer choice. It is part of the infrastructure that shapes everyday life.</p>
+            <p>In this sense, car ownership is not simply a matter of convenience. It is closely tied to economic participation.</p>
 
             <h4>A quieter form of inequality</h4>
 
             <p>Discussions of generational inequality in the UK tend to focus on housing, student debt, and wage stagnation. Transport, by comparison, receives far less attention.</p>
 
-            <p>Yet the ability to move freely, to access work and services, and to participate fully in society is just as important. When that ability becomes tied to rising costs, inequality becomes embedded in everyday mobility.</p>
+            <p>Yet mobility plays a fundamental role in everyday life. The ability to travel for work, education, and social activity shapes access to opportunity in ways that are often overlooked.</p>
 
-            <p>What makes this issue particularly striking is how quietly it has developed. There has been no single moment of crisis, no dramatic policy change. Instead, the gap has widened gradually, through overlapping pressures that are rarely considered together.</p>
+            <p>What makes this issue particularly notable is how gradually it has developed. There has been no single defining moment, but rather a steady increase in pressure across multiple cost areas. Over time, this has reshaped who can realistically afford to drive.</p>
 
             <h4>Conclusion</h4>
 
-            <p>Young people in the UK are not simply turning away from driving. For many, the option is slipping out of reach.</p>
+            <p>Young people in the UK are not simply turning away from driving. For many, the option is becoming less accessible.</p>
 
-            <p>As costs continue to rise and wages struggle to keep pace, car ownership is becoming less accessible to those at the start of their working lives. This shift challenges the idea that declining driving rates reflect changing preferences alone.</p>
+            <p>As costs continue to rise and wages struggle to keep pace, car ownership is increasingly shaped by financial capacity. This challenges the idea that declining driving rates reflect changing preferences alone.</p>
 
-            <p>Instead, it points to a more structural issue. One where economic pressure shapes behaviour, and where access to mobility is no longer evenly distributed.</p>
+            <p>Instead, it points to a broader structural issue. One where economic pressure influences behaviour, and where access to mobility is unevenly distributed.</p>
 
             <p>Driving may once have symbolised independence. Increasingly, it is becoming a marker of who can afford it.</p>
           </div>
@@ -633,6 +761,9 @@
       </div>
     </section>
 
+    <!-- ========================= -->
+    <!-- EDITOR NOTE: QUOTE SECTION -->
+    <!-- ========================= -->
     <section class="quote-strip">
       <div class="site-shell">
         <div class="quote-box">
@@ -642,6 +773,9 @@
       </div>
     </section>
 
+    <!-- ========================= -->
+    <!-- EDITOR NOTE: STORY TWO -->
+    <!-- ========================= -->
     <section class="section" id="story-two">
       <div class="site-shell story-grid">
         <aside class="story-aside">
@@ -651,13 +785,7 @@
               Main argument: the EV transition may be growing nationally, but access remains uneven when charger provision is compared across regions.
             </p>
           </div>
-          <div class="visual-card">
-            <h3>Suggested visuals</h3>
-            <p>
-              Add a UK map showing chargers per 100,000 people and a bar chart comparing the best and worst served regions.
-            </p>
-          </div>
-        </aside>
+          </aside>
 
         <article class="story-card">
           <div class="story-banner story-two">
@@ -670,138 +798,168 @@
               <span class="tag">Regional inequality</span>
             </div>
 
-            <p>The transition to electric vehicles is often presented as a clear sign of progress. Across the UK, the number of electric cars on the road is rising, and public charging infrastructure continues to expand. Government targets and industry investment suggest a future that is cleaner, more efficient, and increasingly electric.</p>
+            <!-- EDITOR NOTE: REPLACE THESE PARAGRAPHS WITH FINAL STORY TWO TEXT -->
+            <p>The transition to electric vehicles is often presented as a clear sign of progress. Across the UK, the number of electric cars on the road has increased rapidly, with more than 1.5 million fully electric vehicles in use as of 2025, accounting for around 4.5% of all cars (Lauren, 2025). Public charging infrastructure has expanded alongside this growth, with over 80,000 devices installed nationwide, reflecting a sharp rise in provision in recent years.</p>
+
+            <p>At first glance, the trajectory appears straightforward. More electric vehicles, more charging points, and a steady move away from petrol and diesel.</p>
 
             <p>But beneath this narrative of growth lies a more uneven reality.</p>
 
-            <p>While electric vehicle infrastructure is expanding overall, access to it is not evenly distributed. In practice, where you live plays a significant role in whether switching to an electric car is realistic at all.</p>
+            <div class="comparison-section">
+              <h5>Interactive image slider</h5>
+              <p>Use the slider to compare familiar petrol infrastructure with the newer EV charging network.</p>
 
-            <div class="visual-placeholder-wrap">
-              <div class="visual-placeholder">
-                <strong>Map placeholder: UK chargers per 100,000 people</strong>
-                <span>Embed a choropleth or region map here to show charger access by region or local authority.</span>
+              <div class="image-compare">
+                <img src="https://images.pexels.com/photos/9796/pexels-photo.jpg" alt="Petrol station" />
+                <div class="image-overlay" id="image-overlay">
+                  <img src="https://images.pexels.com/photos/110844/pexels-photo-110844.jpeg" alt="Electric vehicle charging point" />
+                </div>
+              </div>
+
+              <input class="image-compare-range" type="range" min="0" max="100" value="50" id="comparison-range" />
+
+              <div class="image-labels">
+                <span>Petrol / diesel infrastructure</span>
+                <span>EV charging infrastructure</span>
               </div>
             </div>
 
             <h4>Growth at a national level</h4>
 
-            <p>National statistics present a strong upward trend. The number of registered electric vehicles has increased rapidly in recent years, supported by policy commitments to phase out petrol and diesel cars. At the same time, the number of public charging points has also grown, reaching tens of thousands across the UK.</p>
+            <p>Government policy has played a central role in shaping this transition. Plans to phase out the sale of new petrol and diesel cars by 2030 (UK Government, n.d.) have accelerated both investment and adoption. EV registrations have increased significantly, with annual battery electric sales rising by approximately 23.9% year on year in 2025. Charging infrastructure has expanded in parallel, growing by around 37% between December 2023 and December 2024.(Tromans, P.2025)</p>
 
-            <p>At this level, the transition appears to be accelerating.</p>
+            <p>Taken together, these figures suggest a system moving in the right direction. But they also mask an important limitation.</p>
 
-            <p>However, national totals only tell part of the story. They show how much infrastructure exists, but not how it is distributed.</p>
+            <p>National totals show scale. They do not show access.</p>
 
             <h4>Looking beyond the totals</h4>
 
-            <p>When charging infrastructure is examined relative to population, a different picture emerges.</p>
-
-            <p>Some regions, particularly major urban centres, have far higher availability of public chargers per person. London, for example, consistently ranks among the highest in terms of charger density. In contrast, rural areas and regions outside major cities often have significantly fewer chargers relative to their population.</p>
-
-            <p>This matters because access to charging is one of the most important factors in whether an individual can realistically adopt an electric vehicle. Without reliable access, ownership becomes impractical, regardless of national growth figures.</p>
-
-            <blockquote>
-              National growth can look impressive while local access remains deeply uneven.
-            </blockquote>
+            <p>The way infrastructure is experienced in everyday life is far less uniform than headline figures suggest. National growth can create the impression of steady progress, but access to charging is often determined by far more local factors. The availability of nearby charge points, the ease of using them, and the reliability of the network all shape whether electric vehicles feel like a realistic option. In practice, this means that the transition is not experienced evenly. For some, it is already part of daily life. For others, it remains uncertain, inconvenient, or simply out of reach.</p>
 
             <h4>The urban advantage</h4>
 
-            <p>The concentration of infrastructure in cities reflects a combination of factors. Higher population density makes installation more cost-effective, while existing demand is often stronger in urban areas where early adoption tends to cluster.</p>
+            <p>The concentration of infrastructure in urban areas reflects how and where investment is prioritised.</p>
 
-            <p>Cities also benefit from greater investment, both public and private. Local authorities in urban regions are often better resourced to support infrastructure projects, and private companies are more likely to install chargers where usage is guaranteed.</p>
+            <p>Cities, by their nature, provide the conditions that make charging infrastructure more viable. Higher population density increases usage rates, while shorter distances reduce installation costs. As a result, infrastructure tends to cluster where demand is already strong.</p>
 
-            <p>However, this creates a feedback loop. Areas with more chargers become more attractive for EV adoption, while areas with fewer chargers fall further behind.</p>
+            <p>Urban areas now account for approximately 82.9% of public EV chargers in England and Wales, according to government data. (Department for Transport,2026) This concentration reinforces itself. More chargers make electric vehicles more practical, which in turn increases demand for further infrastructure.</p>
+
+            <p>Over time, this creates a reinforcing cycle of access and expansion.</p>
 
             <h4>Rural constraints</h4>
 
-            <p>In rural areas, the challenges are different. Longer distances, lower population density, and limited existing infrastructure make charger installation more complex and less commercially attractive.</p>
+            <p>Outside of urban centres, the situation is markedly different.</p>
 
-            <p>For residents in these areas, home charging may seem like a solution. But not all households have access to off-street parking or the ability to install a home charger. For those without it, reliance on public infrastructure becomes essential.</p>
+            <p>Lower population density, longer travel distances, and higher installation costs slow the rollout of infrastructure. As a result, rural areas often see fewer charging points relative to their population.</p>
 
-            <p>If that infrastructure is sparse, switching to an electric vehicle becomes significantly more difficult.</p>
+            <p>Only around 17.1% of public chargers are located in rural areas, meaning the majority of infrastructure is concentrated in more populated parts of the country. (Department for Transport, 2026)</p>
 
-            <div class="visual-placeholder-wrap">
-              <div class="visual-placeholder">
-                <strong>Chart placeholder: Best and worst served regions</strong>
-                <span>Use a ranked bar chart here to compare charger availability per capita across regions.</span>
-              </div>
-            </div>
+            <p>For many households, home charging offers a potential solution. But this is not universally available. Around 32.8% of UK households do not have access to off-street parking, meaning they must rely on public infrastructure. (Zapmap, 2026)</p>
+
+            <p>Where that infrastructure is limited, the transition to electric vehicles becomes significantly more difficult.</p>
 
             <h4>A question of access</h4>
 
             <p>The result is a growing divide in access to electric mobility.</p>
 
-            <p>On paper, the UK is moving towards a cleaner transport system. In practice, that transition is easier for some than for others. Those in well-served urban areas can take advantage of expanding infrastructure, while others face structural barriers that limit participation.</p>
+            <p>In some areas, charging infrastructure is visible, accessible, and integrated into everyday life. In others, it remains sparse and difficult to rely on. This uneven distribution shapes who can realistically participate in the transition.</p>
 
-            <p>This raises broader questions about fairness. If the transition to electric vehicles is a central part of climate policy, then access to the infrastructure that supports it becomes a matter of equity, not just convenience.</p>
+            <p>Access, in this sense, becomes just as important as availability.</p>
 
             <h4>What the data shows</h4>
 
-            <p>Comparing regions directly highlights the scale of the disparity. When charger numbers are adjusted for population, the gap between the most and least served areas becomes clear.</p>
+            <p>A direct comparison between regions highlights the scale of this imbalance.</p>
 
-            <p>A simple bar chart comparing regions by chargers per 100,000 people reveals a consistent pattern: urban areas dominate, while rural regions lag behind. The difference is not marginal. In some cases, access levels vary dramatically between regions within the same country.</p>
+            <p>The best-served area, London, has 338.1 chargers per 100,000 people, while the least-served region, Northern Ireland, has just 57.5 per 100,000. (Department for Transport, 2026)</p>
 
-            <p>This reinforces the idea that national growth alone is not a sufficient measure of progress. Without considering distribution, it is difficult to assess who is actually benefiting from the transition.</p>
+            <p>This difference is not marginal. It represents a structural gap in access to infrastructure.</p>
+
+            <p>Without adjusting for population, this disparity is largely hidden. But once scaled, it becomes central to understanding how the transition is unfolding.</p>
 
             <h4>Why it matters</h4>
 
-            <p>Transport is closely linked to access to work, services, and social participation. If the shift to electric vehicles creates uneven access to mobility, it risks reinforcing existing inequalities rather than reducing them.</p>
+            <p>Transport is closely tied to access to employment, services, and social participation. If access to charging infrastructure is uneven, so too is access to electric mobility.</p>
 
-            <p>This is particularly important as the UK moves towards phasing out new petrol and diesel cars. If alternatives are not equally accessible, some groups may be left with fewer viable transport options.</p>
+            <p>As the UK moves towards phasing out petrol and diesel vehicles, this imbalance becomes more significant. Those in well-served areas are able to transition more easily, while others face practical limitations.</p>
 
-            <p>The transition to electric vehicles is often framed as a technological shift. But it is also a social one. How infrastructure is distributed will shape who can participate in that transition.</p>
+            <p>This raises broader questions about how policy is implemented. A transition designed to be national in scope may, in practice, operate very differently at a local level.</p>
 
             <h4>Conclusion</h4>
 
-            <p>The growth of electric vehicles in the UK tells a story of progress. But it is an incomplete one.</p>
+            <p>The growth of electric vehicles in the UK tells a story of progress. But it is not a complete one.</p>
 
-            <p>Looking more closely at how infrastructure is distributed reveals a more complex picture. Access is uneven, and location plays a decisive role in who can benefit from the transition.</p>
+            <p>Looking more closely at how infrastructure is distributed reveals a more complex reality. Access varies significantly depending on location, shaping who can benefit from the transition and who cannot.</p>
 
-            <p>As the UK continues to move towards an electric future, the question is not just how many chargers are installed, but where they are placed.</p>
+            <p>As the UK continues to move towards an electric future, the question is no longer just how much infrastructure exists.</p>
 
-            <p>Because in the transition to electric vehicles, access is everything.</p>
+            <p>It is where it exists — and who it serves.</p>
           </div>
         </article>
       </div>
     </section>
+</main>
 
-    <section class="section" id="sources">
-      <div class="site-shell">
-        <div class="section-header">
-          <span class="eyebrow">Add your evidence</span>
-          <h2>Source and embed section</h2>
-          <p>
-            Use this area to list data sources, embed Flourish charts, or add short notes on methods once your visuals are complete.
-          </p>
-        </div>
-
-        <div class="story-grid">
-          <div class="source-card">
-            <h3>Possible sources for story one</h3>
-            <ul>
-              <li>Office for National Statistics earnings datasets</li>
-              <li>Insurance premium reports for younger drivers</li>
-              <li>Used car price or fuel price data from a reliable UK source</li>
-              <li>DVLA or transport data on licence holding by age</li>
-            </ul>
-          </div>
-          <div class="source-card">
-            <h3>Possible sources for story two</h3>
-            <ul>
-              <li>Department for Transport public charge point data</li>
-              <li>ONS population estimates</li>
-              <li>Regional or local authority geographic data for mapping</li>
-              <li>Supporting EV registration context where useful</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </section>
-  </main>
-
+  <!-- ========================= -->
+  <!-- EDITOR NOTE: FOOTER -->
+  <!-- ========================= -->
   <footer class="footer">
     <div class="site-shell">
       <p>Created as a digital feature project on transport inequality in the United Kingdom.</p>
     </div>
   </footer>
+
+  <script>
+    /* ========================= */
+    /* EDITOR NOTE: TIMELINE SCRIPT */
+    /* ========================= */
+
+    const timelineButtons = document.querySelectorAll('.timeline-buttons button');
+    const timelinePanel = document.getElementById('timeline-panel');
+
+    const timelineEvents = {
+      1994: {
+        title: '1994',
+        text: 'Around 75% of people aged 21 to 29 held a driving licence, showing how normal driving once was for young adults.'
+      },
+      2014: {
+        title: '2014',
+        text: 'Licence holding among 21 to 29 year olds had fallen to around 63%, suggesting a significant shift in access and behaviour.'
+      },
+      2021: {
+        title: '2021',
+        text: 'Used car prices rose sharply during and after the pandemic, increasing pressure on young drivers trying to get on the road.'
+      },
+      2025: {
+        title: '2025',
+        text: 'Young drivers now face high insurance costs, wider ownership costs and a weaker relationship between wages and affordability.'
+      }
+    };
+
+    timelineButtons.forEach(function(button) {
+      button.addEventListener('click', function() {
+        const year = this.getAttribute('data-year');
+
+        timelineButtons.forEach(function(btn) {
+          btn.classList.remove('active');
+        });
+
+        this.classList.add('active');
+
+        timelinePanel.innerHTML = '<strong>' + timelineEvents[year].title + '</strong><p>' + timelineEvents[year].text + '</p>';
+      });
+    });
+
+    /* ========================= */
+    /* EDITOR NOTE: IMAGE SLIDER SCRIPT */
+    /* ========================= */
+
+    const comparisonRange = document.getElementById('comparison-range');
+    const imageOverlay = document.getElementById('image-overlay');
+
+    comparisonRange.addEventListener('input', function() {
+      imageOverlay.style.width = this.value + '%';
+    });
+  </script>
 </body>
 </html>
+
