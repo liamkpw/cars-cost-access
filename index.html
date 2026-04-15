@@ -56,10 +56,6 @@
       margin: 0 auto;
     }
 
-    /* ========================= */
-    /* EDITOR NOTE: TOP HERO AREA */
-    /* ========================= */
-
     .hero {
       min-height: 88vh;
       display: flex;
@@ -175,10 +171,6 @@
       font-size: 0.95rem;
     }
 
-    /* ========================= */
-    /* EDITOR NOTE: NAVIGATION */
-    /* ========================= */
-
     .top-nav {
       position: sticky;
       top: 0;
@@ -210,10 +202,6 @@
       color: var(--muted);
       font-size: 0.95rem;
     }
-
-    /* ========================= */
-    /* EDITOR NOTE: GENERAL PAGE LAYOUT */
-    /* ========================= */
 
     .section {
       padding: 5rem 0;
@@ -269,15 +257,10 @@
       font-size: 0.95rem;
     }
 
-    
     .story-card {
       padding: 0;
       overflow: hidden;
     }
-
-    /* ========================= */
-    /* EDITOR NOTE: STORY BANNERS */
-    /* ========================= */
 
     .story-banner {
       min-height: 280px;
@@ -364,10 +347,6 @@
       font-size: 1.05rem;
     }
 
-    /* ========================= */
-    /* EDITOR NOTE: STORY 1 TIMELINE */
-    /* ========================= */
-
     .timeline-section {
       margin: 2rem 0;
       padding: 1.4rem;
@@ -426,10 +405,6 @@
       font-size: 0.98rem;
     }
 
-    /* ========================= */
-    /* EDITOR NOTE: STORY 2 IMAGE SLIDER */
-    /* ========================= */
-
     .comparison-section {
       margin: 2rem 0;
       padding: 1.4rem;
@@ -452,42 +427,89 @@
       font-size: 0.98rem;
     }
 
-    .image-compare {
-      position: relative;
-      width: 100%;
+    .compare-wrap {
       max-width: 760px;
       margin: 0 auto;
-      overflow: hidden;
+    }
+
+    .image-compare {
+      --pos: 50%;
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16 / 9;
       border-radius: 18px;
+      overflow: hidden;
       border: 1px solid rgba(255,255,255,0.16);
       box-shadow: var(--shadow);
-      aspect-ratio: 16 / 9;
       background: #111a2b;
+      cursor: ew-resize;
+      user-select: none;
+      touch-action: none;
     }
 
-    .image-compare > img,
-    .image-overlay img {
+    .compare-base,
+    .compare-overlay {
       position: absolute;
       inset: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
     }
 
-    .image-overlay {
+    .compare-base {
+      background-image: url('https://northeastnews.net/pages/wp-content/uploads/2018/10/gas-pump.jpg');
+    }
+
+    .compare-overlay {
+      background-image: url('https://www.cardenpark.co.uk/wp-content/uploads/2021/04/charge-scaled-1.jpg');
+      clip-path: inset(0 0 0 var(--pos));
+    }
+
+    .compare-divider {
       position: absolute;
       top: 0;
-      left: 0;
-      width: 50%;
-      height: 100%;
-      overflow: hidden;
-      border-right: 2px solid rgba(255,255,255,0.85);
+      bottom: 0;
+      left: var(--pos);
+      width: 0;
+      transform: translateX(-1px);
+      pointer-events: none;
     }
 
-    .image-compare-range {
+    .compare-divider::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 50%;
+      width: 2px;
+      transform: translateX(-50%);
+      background: rgba(255,255,255,0.9);
+      box-shadow: 0 0 0 1px rgba(0,0,0,0.15);
+    }
+
+    .compare-handle {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 52px;
+      height: 52px;
+      border-radius: 999px;
+      background: rgba(8, 16, 29, 0.88);
+      border: 2px solid rgba(255,255,255,0.92);
+      display: grid;
+      place-items: center;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.35);
+      color: #fff;
+      font-size: 1.15rem;
+      font-weight: 700;
+    }
+
+    .compare-range {
       width: 100%;
       margin-top: 1rem;
       accent-color: var(--slider-accent);
+      cursor: pointer;
     }
 
     .image-labels {
@@ -498,10 +520,6 @@
       color: var(--muted);
       font-size: 0.9rem;
     }
-
-    /* ========================= */
-    /* EDITOR NOTE: QUOTE STRIP AND FOOTER */
-    /* ========================= */
 
     .quote-strip {
       padding: 3rem 0;
@@ -578,13 +596,16 @@
       .timeline-buttons {
         flex-direction: column;
       }
+
+      .compare-handle {
+        width: 46px;
+        height: 46px;
+        font-size: 1rem;
+      }
     }
   </style>
 </head>
 <body>
-  <!-- ========================= -->
-  <!-- EDITOR NOTE: SITE NAVIGATION -->
-  <!-- ========================= -->
   <nav class="top-nav">
     <div class="nav-inner">
       <a href="#top" class="brand">Cars, Cost & Access</a>
@@ -596,9 +617,6 @@
     </div>
   </nav>
 
-  <!-- ========================= -->
-  <!-- EDITOR NOTE: HERO -->
-  <!-- ========================= -->
   <header class="hero" id="top">
     <div class="site-shell">
       <div class="hero-content">
@@ -632,9 +650,6 @@
   </header>
 
   <main>
-    <!-- ========================= -->
-    <!-- EDITOR NOTE: OVERVIEW SECTION -->
-    <!-- ========================= -->
     <section class="section" id="overview">
       <div class="site-shell">
         <div class="section-header">
@@ -648,9 +663,6 @@
       </div>
     </section>
 
-    <!-- ========================= -->
-    <!-- EDITOR NOTE: STORY ONE -->
-    <!-- ========================= -->
     <section class="section" id="story-one">
       <div class="site-shell story-grid">
         <aside class="story-aside">
@@ -661,7 +673,7 @@
               costs have risen faster than wages.
             </p>
           </div>
-          </aside>
+        </aside>
 
         <article class="story-card">
           <div class="story-banner story-one">
@@ -674,7 +686,6 @@
               <span class="tag">Transport inequality</span>
             </div>
 
-            <!-- EDITOR NOTE: REPLACE THESE PARAGRAPHS WITH FINAL STORY ONE TEXT -->
             <p>For decades, learning to drive has been treated as a rite of passage in the UK. A symbol of independence, adulthood, and opportunity. But for many young people today, getting behind the wheel is no longer a given. It is becoming a luxury.</p>
 
             <p>Across the UK, the cost of driving has risen sharply over the past decade. Insurance premiums for young drivers have increased significantly, with recent estimates suggesting average annual costs now sit around £1,500–£2,200 per year for new drivers in the UK (Cook,2025) At the same time, used car prices surged during and after the pandemic, rising by approximately 32% year-on-year at their peak in 2021–2022 before stabilising at a higher baseline. (Sharkey,2025) Fuel prices, while fluctuating, have also contributed to the overall cost of driving, with average petrol prices reaching around 134p per litre in 2026, with spikes up to around 179p per litre during recent price surges. (Brumble Guides,2026)</p>
@@ -761,9 +772,6 @@
       </div>
     </section>
 
-    <!-- ========================= -->
-    <!-- EDITOR NOTE: QUOTE SECTION -->
-    <!-- ========================= -->
     <section class="quote-strip">
       <div class="site-shell">
         <div class="quote-box">
@@ -773,9 +781,6 @@
       </div>
     </section>
 
-    <!-- ========================= -->
-    <!-- EDITOR NOTE: STORY TWO -->
-    <!-- ========================= -->
     <section class="section" id="story-two">
       <div class="site-shell story-grid">
         <aside class="story-aside">
@@ -785,7 +790,7 @@
               Main argument: the EV transition may be growing nationally, but access remains uneven when charger provision is compared across regions.
             </p>
           </div>
-          </aside>
+        </aside>
 
         <article class="story-card">
           <div class="story-banner story-two">
@@ -798,7 +803,6 @@
               <span class="tag">Regional inequality</span>
             </div>
 
-            <!-- EDITOR NOTE: REPLACE THESE PARAGRAPHS WITH FINAL STORY TWO TEXT -->
             <p>The transition to electric vehicles is often presented as a clear sign of progress. Across the UK, the number of electric cars on the road has increased rapidly, with more than 1.5 million fully electric vehicles in use as of 2025, accounting for around 4.5% of all cars (Lauren, 2025). Public charging infrastructure has expanded alongside this growth, with over 80,000 devices installed nationwide, reflecting a sharp rise in provision in recent years.</p>
 
             <p>At first glance, the trajectory appears straightforward. More electric vehicles, more charging points, and a steady move away from petrol and diesel.</p>
@@ -807,20 +811,32 @@
 
             <div class="comparison-section">
               <h5>Interactive image slider</h5>
-              <p>Use the slider to compare familiar petrol infrastructure with the newer EV charging network.</p>
+              <p>Drag the divider, move the slider below, or use your mouse wheel over the image to reveal more petrol or more EV infrastructure.</p>
 
-              <div class="image-compare">
-                <img src="https://images.pexels.com/photos/9796/pexels-photo.jpg" alt="Petrol station" />
-                <div class="image-overlay" id="image-overlay">
-                  <img src="https://images.pexels.com/photos/110844/pexels-photo-110844.jpeg" alt="Electric vehicle charging point" />
+              <div class="compare-wrap">
+                <div class="image-compare" id="imageCompare" aria-label="Image comparison slider">
+                  <div class="compare-base"></div>
+                  <div class="compare-overlay" id="compareOverlay"></div>
+
+                  <div class="compare-divider" id="compareDivider">
+                    <div class="compare-handle">↔</div>
+                  </div>
                 </div>
-              </div>
 
-              <input class="image-compare-range" type="range" min="0" max="100" value="50" id="comparison-range" />
+                <input
+                  class="compare-range"
+                  type="range"
+                  min="0"
+                  max="100"
+                  value="50"
+                  id="comparisonRange"
+                  aria-label="Adjust image comparison"
+                />
 
-              <div class="image-labels">
-                <span>Petrol / diesel infrastructure</span>
-                <span>EV charging infrastructure</span>
+                <div class="image-labels">
+                  <span>More petrol station</span>
+                  <span>More EV charger</span>
+                </div>
               </div>
             </div>
 
@@ -897,11 +913,8 @@
         </article>
       </div>
     </section>
-</main>
+  </main>
 
-  <!-- ========================= -->
-  <!-- EDITOR NOTE: FOOTER -->
-  <!-- ========================= -->
   <footer class="footer">
     <div class="site-shell">
       <p>Created as a digital feature project on transport inequality in the United Kingdom.</p>
@@ -909,10 +922,6 @@
   </footer>
 
   <script>
-    /* ========================= */
-    /* EDITOR NOTE: TIMELINE SCRIPT */
-    /* ========================= */
-
     const timelineButtons = document.querySelectorAll('.timeline-buttons button');
     const timelinePanel = document.getElementById('timeline-panel');
 
@@ -944,22 +953,60 @@
         });
 
         this.classList.add('active');
-
         timelinePanel.innerHTML = '<strong>' + timelineEvents[year].title + '</strong><p>' + timelineEvents[year].text + '</p>';
       });
     });
 
-    /* ========================= */
-    /* EDITOR NOTE: IMAGE SLIDER SCRIPT */
-    /* ========================= */
+    const compare = document.getElementById('imageCompare');
+    const range = document.getElementById('comparisonRange');
 
-    const comparisonRange = document.getElementById('comparison-range');
-    const imageOverlay = document.getElementById('image-overlay');
+    function setComparePosition(value) {
+      const clamped = Math.max(0, Math.min(100, value));
+      compare.style.setProperty('--pos', clamped + '%');
+      range.value = clamped;
+    }
 
-    comparisonRange.addEventListener('input', function() {
-      imageOverlay.style.width = this.value + '%';
+    range.addEventListener('input', function () {
+      setComparePosition(this.value);
     });
+
+    function updateFromPointer(clientX) {
+      const rect = compare.getBoundingClientRect();
+      const x = clientX - rect.left;
+      const percent = (x / rect.width) * 100;
+      setComparePosition(percent);
+    }
+
+    let dragging = false;
+
+    compare.addEventListener('pointerdown', function (e) {
+      dragging = true;
+      compare.setPointerCapture(e.pointerId);
+      updateFromPointer(e.clientX);
+    });
+
+    compare.addEventListener('pointermove', function (e) {
+      if (!dragging) return;
+      updateFromPointer(e.clientX);
+    });
+
+    compare.addEventListener('pointerup', function () {
+      dragging = false;
+    });
+
+    compare.addEventListener('pointercancel', function () {
+      dragging = false;
+    });
+
+    compare.addEventListener('wheel', function (e) {
+      e.preventDefault();
+      const step = 3;
+      const current = Number(range.value);
+      const next = e.deltaY > 0 ? current - step : current + step;
+      setComparePosition(next);
+    }, { passive: false });
+
+    setComparePosition(50);
   </script>
 </body>
 </html>
-
