@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Cars, Cost and Access in the UK</title>
   <style>
+    /* overall colour palette + site-wide variables */
     :root {
       --bg: #0b1220;
       --bg-soft: #111a2b;
@@ -21,6 +22,7 @@
       --slider-accent: #f59e0b;
     }
 
+    /* reset / base styling */
     * {
       box-sizing: border-box;
       margin: 0;
@@ -51,11 +53,13 @@
       display: block;
     }
 
+    /* main width container */
     .site-shell {
       width: min(var(--max-width), calc(100% - 2rem));
       margin: 0 auto;
     }
 
+    /* hero / opening section */
     .hero {
       min-height: 88vh;
       display: flex;
@@ -118,6 +122,7 @@
       flex-wrap: wrap;
     }
 
+    /* buttons */
     .button {
       display: inline-flex;
       align-items: center;
@@ -144,6 +149,7 @@
       transform: translateY(-2px);
     }
 
+    /* hero stats cards */
     .stats {
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -171,6 +177,7 @@
       font-size: 0.95rem;
     }
 
+    /* sticky nav */
     .top-nav {
       position: sticky;
       top: 0;
@@ -203,6 +210,7 @@
       font-size: 0.95rem;
     }
 
+    /* generic section spacing */
     .section {
       padding: 5rem 0;
     }
@@ -223,6 +231,7 @@
       max-width: 62ch;
     }
 
+    /* story layout */
     .story-grid {
       display: grid;
       grid-template-columns: 280px minmax(0, 1fr);
@@ -262,6 +271,7 @@
       overflow: hidden;
     }
 
+    /* story header images */
     .story-banner {
       min-height: 280px;
       display: flex;
@@ -289,10 +299,12 @@
       background: linear-gradient(180deg, rgba(11,18,32,0.15), rgba(11,18,32,0.92));
     }
 
+    /* story one image */
     .story-banner.story-one::before {
       background-image: url('https://live.staticflickr.com/65535/52650535959_70107ee4e2_b.jpg');
     }
 
+    /* story two image */
     .story-banner.story-two::before {
       background-image: url('https://editorial.pxcrush.net/carsales/general/editorial/tesla-cybertruck-setb-1-pwj0.jpg?width=1024&height=682');
     }
@@ -303,6 +315,7 @@
       max-width: 12ch;
     }
 
+    /* body copy for both stories */
     .story-body {
       padding: 2rem;
     }
@@ -347,6 +360,7 @@
       font-size: 1.05rem;
     }
 
+    /* timeline area for story one */
     .timeline-section {
       margin: 2rem 0;
       padding: 1.4rem;
@@ -377,6 +391,7 @@
       border: none;
     }
 
+    /* image comparison section for story two */
     .comparison-section {
       margin: 2rem 0;
       padding: 1.4rem;
@@ -404,6 +419,7 @@
       margin: 0 auto;
     }
 
+    /* before/after image slider */
     .image-compare {
       --pos: 50%;
       position: relative;
@@ -493,6 +509,7 @@
       font-size: 0.9rem;
     }
 
+    /* linking quote between both stories */
     .quote-strip {
       padding: 3rem 0;
     }
@@ -516,6 +533,7 @@
       color: var(--muted);
     }
 
+    /* footer */
     .footer {
       padding: 3rem 0 4rem;
       color: var(--muted);
@@ -523,6 +541,7 @@
       font-size: 0.95rem;
     }
 
+    /* tablet layout changes */
     @media (max-width: 960px) {
       .story-grid {
         grid-template-columns: 1fr;
@@ -538,6 +557,7 @@
       }
     }
 
+    /* mobile layout changes */
     @media (max-width: 700px) {
       .hero {
         min-height: auto;
@@ -578,6 +598,7 @@
   </style>
 </head>
 <body>
+  <!-- top navigation -->
   <nav class="top-nav">
     <div class="nav-inner">
       <a href="#top" class="brand">Cars, Cost & Access</a>
@@ -589,6 +610,7 @@
     </div>
   </nav>
 
+  <!-- hero / landing section -->
   <header class="hero" id="top">
     <div class="site-shell">
       <div class="hero-content">
@@ -622,6 +644,7 @@
   </header>
 
   <main>
+    <!-- short project overview / intro to both stories -->
     <section class="section" id="overview">
       <div class="site-shell">
         <div class="section-header">
@@ -635,8 +658,10 @@
       </div>
     </section>
 
+    <!-- STORY ONE START -->
     <section class="section" id="story-one">
       <div class="site-shell story-grid">
+        <!-- side notes / story one summary -->
         <aside class="story-aside">
           <div class="info-card">
             <h3>Story one at a glance</h3>
@@ -647,10 +672,14 @@
           </div>
         </aside>
 
+        <!-- main story one article card -->
         <article class="story-card">
+          <!-- story one banner image + headline -->
           <div class="story-banner story-one">
             <h3>Priced Out: Why Young People in the UK Are Driving Less</h3>
           </div>
+
+          <!-- insert story one body copy here -->
           <div class="story-body">
             <div class="story-meta">
               <span class="tag">Feature story</span>
@@ -666,6 +695,7 @@
 
             <p>This raises a simple but important question: are young people choosing not to drive, or are they being priced out?</p>
 
+            <!-- interactive timeline embed for story one -->
             <div class="timeline-section">
               <h5>Interactive timeline</h5>
               <div class="timeline-embed-wrap">
@@ -673,6 +703,7 @@
               </div>
             </div>
 
+            <!-- next section / cost argument -->
             <h4>The cost of getting on the road</h4>
 
             <p>At first glance, rising driving costs are nothing new. Fuel prices have always fluctuated, and insurance has long been expensive for younger drivers. What has changed is how these costs combine.</p>
@@ -683,6 +714,7 @@
 
             <p>This cumulative burden is what distinguishes the current moment from previous periods of rising costs. It is not simply that driving is expensive. It is that multiple cost pressures are now felt at once.</p>
 
+            <!-- next section / wages comparison -->
             <h4>Wages vs costs: a growing imbalance</h4>
 
             <p>The issue, then, is not just cost, but proportion.</p>
@@ -695,6 +727,7 @@
 
             <p>The result is not simply reduced affordability, but increased financial uncertainty around car ownership.</p>
 
+            <!-- next section / cultural choice vs economic pressure -->
             <h4>More than a lifestyle choice</h4>
 
             <p>Declining rates of driving among young people are often explained through lifestyle changes. Increasing urbanisation, improved public transport, and shifting attitudes towards car ownership are all commonly cited.</p>
@@ -705,6 +738,7 @@
 
             <p>This overlap suggests that economic factors are playing a central role. Opting out of driving may appear to be a choice, but in many cases it reflects limited financial capacity.</p>
 
+            <!-- next section / why the story matters -->
             <h4>Why it matters</h4>
 
             <p>The implications of this shift extend beyond individual convenience. In many parts of the UK, particularly outside major cities, access to a car is closely tied to access to opportunity.</p>
@@ -715,6 +749,7 @@
 
             <p>In this sense, car ownership is not simply a matter of convenience. It is closely tied to economic participation.</p>
 
+            <!-- next section / inequality angle -->
             <h4>A quieter form of inequality</h4>
 
             <p>Discussions of generational inequality in the UK tend to focus on housing, student debt, and wage stagnation. Transport, by comparison, receives far less attention.</p>
@@ -723,6 +758,7 @@
 
             <p>What makes this issue particularly notable is how gradually it has developed. There has been no single defining moment, but rather a steady increase in pressure across multiple cost areas. Over time, this has reshaped who can realistically afford to drive.</p>
 
+            <!-- story one conclusion -->
             <h4>Conclusion</h4>
 
             <p>Young people in the UK are not simply turning away from driving. For many, the option is becoming less accessible.</p>
@@ -736,7 +772,9 @@
         </article>
       </div>
     </section>
+    <!-- STORY ONE END -->
 
+    <!-- linking quote between story one and story two -->
     <section class="quote-strip">
       <div class="site-shell">
         <div class="quote-box">
@@ -746,8 +784,10 @@
       </div>
     </section>
 
+    <!-- STORY TWO START -->
     <section class="section" id="story-two">
       <div class="site-shell story-grid">
+        <!-- side notes / story two summary -->
         <aside class="story-aside">
           <div class="info-card">
             <h3>Story two at a glance</h3>
@@ -757,10 +797,14 @@
           </div>
         </aside>
 
+        <!-- main story two article card -->
         <article class="story-card">
+          <!-- story two banner image + headline -->
           <div class="story-banner story-two">
             <h3>The EV Divide: Who Actually Has Access to Electric Cars in the UK?</h3>
           </div>
+
+          <!-- insert story two body copy here -->
           <div class="story-body">
             <div class="story-meta">
               <span class="tag">Feature story</span>
@@ -774,6 +818,7 @@
 
             <p>But beneath this narrative of growth lies a more uneven reality.</p>
 
+            <!-- interactive image comparison section -->
             <div class="comparison-section">
               <h5>Interactive image slider</h5>
               <p>Drag the divider, move the slider below, or use your mouse wheel over the image to reveal more petrol or more EV infrastructure.</p>
@@ -805,6 +850,7 @@
               </div>
             </div>
 
+            <!-- national growth section -->
             <h4>Growth at a national level</h4>
 
             <p>Government policy has played a central role in shaping this transition. Plans to phase out the sale of new petrol and diesel cars by 2030 (UK Government, n.d.) have accelerated both investment and adoption. EV registrations have increased significantly, with annual battery electric sales rising by approximately 23.9% year on year in 2025. Charging infrastructure has expanded in parallel, growing by around 37% between December 2023 and December 2024.(Tromans, P.2025)</p>
@@ -813,10 +859,12 @@
 
             <p>National totals show scale. They do not show access.</p>
 
+            <!-- access beyond the national picture -->
             <h4>Looking beyond the totals</h4>
 
             <p>The way infrastructure is experienced in everyday life is far less uniform than headline figures suggest. National growth can create the impression of steady progress, but access to charging is often determined by far more local factors. The availability of nearby charge points, the ease of using them, and the reliability of the network all shape whether electric vehicles feel like a realistic option. In practice, this means that the transition is not experienced evenly. For some, it is already part of daily life. For others, it remains uncertain, inconvenient, or simply out of reach.</p>
 
+            <!-- urban/rural comparison -->
             <h4>The urban advantage</h4>
 
             <p>The concentration of infrastructure in urban areas reflects how and where investment is prioritised.</p>
@@ -827,6 +875,7 @@
 
             <p>Over time, this creates a reinforcing cycle of access and expansion.</p>
 
+            <!-- rural limitations -->
             <h4>Rural constraints</h4>
 
             <p>Outside of urban centres, the situation is markedly different.</p>
@@ -839,6 +888,7 @@
 
             <p>Where that infrastructure is limited, the transition to electric vehicles becomes significantly more difficult.</p>
 
+            <!-- access + inequality section -->
             <h4>A question of access</h4>
 
             <p>The result is a growing divide in access to electric mobility.</p>
@@ -847,6 +897,7 @@
 
             <p>Access, in this sense, becomes just as important as availability.</p>
 
+            <!-- regional comparison section -->
             <h4>What the data shows</h4>
 
             <p>A direct comparison between regions highlights the scale of this imbalance.</p>
@@ -857,6 +908,7 @@
 
             <p>Without adjusting for population, this disparity is largely hidden. But once scaled, it becomes central to understanding how the transition is unfolding.</p>
 
+            <!-- why story two matters -->
             <h4>Why it matters</h4>
 
             <p>Transport is closely tied to access to employment, services, and social participation. If access to charging infrastructure is uneven, so too is access to electric mobility.</p>
@@ -865,6 +917,7 @@
 
             <p>This raises broader questions about how policy is implemented. A transition designed to be national in scope may, in practice, operate very differently at a local level.</p>
 
+            <!-- story two conclusion -->
             <h4>Conclusion</h4>
 
             <p>The growth of electric vehicles in the UK tells a story of progress. But it is not a complete one.</p>
@@ -878,8 +931,10 @@
         </article>
       </div>
     </section>
+    <!-- STORY TWO END -->
   </main>
 
+  <!-- footer -->
   <footer class="footer">
     <div class="site-shell">
       <p>Created as a digital feature project on transport inequality in the United Kingdom.</p>
@@ -887,19 +942,23 @@
   </footer>
 
   <script>
+    // image comparison slider script
     const compare = document.getElementById('imageCompare');
     const range = document.getElementById('comparisonRange');
 
+    // sets slider position visually + updates range input
     function setComparePosition(value) {
       const clamped = Math.max(0, Math.min(100, value));
       compare.style.setProperty('--pos', clamped + '%');
       range.value = clamped;
     }
 
+    // update from the range slider underneath
     range.addEventListener('input', function () {
       setComparePosition(this.value);
     });
 
+    // lets user drag directly on the image
     function updateFromPointer(clientX) {
       const rect = compare.getBoundingClientRect();
       const x = clientX - rect.left;
@@ -909,17 +968,20 @@
 
     let dragging = false;
 
+    // start dragging comparison handle
     compare.addEventListener('pointerdown', function (e) {
       dragging = true;
       compare.setPointerCapture(e.pointerId);
       updateFromPointer(e.clientX);
     });
 
+    // move handle while dragging
     compare.addEventListener('pointermove', function (e) {
       if (!dragging) return;
       updateFromPointer(e.clientX);
     });
 
+    // stop dragging
     compare.addEventListener('pointerup', function () {
       dragging = false;
     });
@@ -928,6 +990,7 @@
       dragging = false;
     });
 
+    // mouse wheel support over comparison image
     compare.addEventListener('wheel', function (e) {
       e.preventDefault();
       const step = 3;
@@ -936,11 +999,7 @@
       setComparePosition(next);
     }, { passive: false });
 
-    setComparePosition(50);
-  </script>
-</body>
-</html>
-
+    // default starting point for comparison slider
     setComparePosition(50);
   </script>
 </body>
